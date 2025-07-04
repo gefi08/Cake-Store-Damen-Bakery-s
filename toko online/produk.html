@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cake Store - Damen Bakery's</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container position-relative">
+      <!-- Logo kiri sederhana, hanya tulisan -->
+     <a class="navbar-brand fw-bold d-flex align-items-center" href="#" style="font-family: 'Poppins', sans-serif; font-size: 1.5rem; color: #ffffff;">
+  <img src="logo.png.png" alt="Logo" style="height:38px; width:auto; margin-right:10px; border-radius:8px;">
+  Damen <span style="color:#ff69b4;">Bakery's</span>
+</a>
+      <!-- Keranjang versi mobile (Shopee style) -->
+      <div class="d-lg-none position-relative ms-auto me-2">
+        <a href="keranjang.html" class="btn position-relative d-flex align-items-center px-3 py-2 rounded-pill shadow-sm" style="background:#fff3f8; border:1.5px solid #ff69b4;">
+          <i class="bi bi-cart-fill fs-5" style="color:#ff69b4;"></i>
+          <span class="ms-2 fw-semibold" style="color:#3a3a5a;">Keranjang</span>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" id="cart-badge-mobile" style="background:#ff69b4; color:#fff; font-size:0.85em; border:2px solid #fff;">0</span>
+        </a>
+      </div>
+      <!-- Tombol hamburger -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Isi navbar -->
+      <div class="collapse navbar-collapse mt-2 mt-lg-0" id="navbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link nav-link-efek" href="index.html">Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-efek" href="produk.html">Produk</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-efek" href="tentang.html">Tentang</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-efek" href="hubungi.html">Hubungi Kami</a>
+          </li>
+        </ul>
+      <!-- Form pencarian khusus versi mobile -->
+      <style>
+        .nav-link-efek {
+          position: relative;
+          transition: color 0.2s;
+          cursor: pointer;
+        }
+        .nav-link-efek:active {
+          color: #ff69b4 !important;
+          background: rgba(255,105,180,0.08);
+          border-radius: 6px;
+        }
+        .nav-link-efek::after {
+          content: "";
+          display: block;
+          width: 0;
+          height: 2px;
+          background: #ff69b4;
+          transition: width 0.2s;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+        }
+        .nav-link-efek:hover::after {
+          width: 100%;
+        }
+        /* Mobile search style mirip desktop */
+        .mobile-search-form {
+          width: 100%;
+          gap: 0.5rem;
+        }
+        .mobile-search-form .form-control {
+          border-radius: 50px;
+          min-width: 0;
+          font-size: 1em;
+          background: #fff;
+          border: 1.5px solid #ff69b4;
+          color: #3a3a5a;
+        }
+        .mobile-search-form .btn-pink {
+          background: #ff69b4;
+          color: #fff;
+            font-weight: 600;
+            border-radius: 50px;
+            padding-left: 0.9em;
+            padding-right: 0.9em;
+            border: none;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 0.3em;
+            min-width: 0;
+            }
+            /* Tombol cari mobile lebih pendek */
+            .mobile-search-form .btn-pink {
+            padding-left: 0.8em;
+            padding-right: 0.8em;
+            font-size: 0.95em;
+            min-width: 60px;
+            max-width: 80px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            }
+            .mobile-search-form {
+            flex-wrap: nowrap;
+            flex-direction: row;
+            align-items: center;
+            display: flex;
+            gap: 0.5rem;
+            }
+            @media (max-width: 576px) {
+            .mobile-search-form .form-control {
+            min-width: 0;
+            font-size: 0.97em;
+            }
+            .mobile-search-form .btn-pink {
+            font-size: 0.93em;
+            min-width: 48px;
+            max-width: 70px;
+            padding-left: 0.6em;
+            padding-right: 0.6em;
+            }
+            }
+            </style>
+            <form class="d-flex d-lg-none px-2 mt-2 mobile-search-form align-items-center" role="search" style="gap:0.5rem;">
+            <input class="form-control form-control-sm rounded-pill" type="search" placeholder="Cari produk..." style="min-width:120px;"/>
+            <button class="btn btn-sm btn-pink rounded-pill" type="submit" style="display:flex;align-items:center;justify-content:center;">
+              <span style="width:100%;text-align:center;">Cari</span>
+            </button>
+            </form>
+        <!-- Pencarian + keranjang versi desktop (Shopee style) -->
+        <div class="d-none d-lg-flex align-items-center gap-3">
+          <form class="d-flex" role="search">
+            <input class="form-control form-control-sm me-2 rounded-pill" type="search" placeholder="Cari produk..." style="min-width:180px;"/>
+            <button class="btn btn-sm btn-pink rounded-pill px-3" type="submit" style="background:#ff69b4; color:#fff; font-weight:600;">Cari</button>
+          </form>
+          <div class="dropdown">
+            <a href="keranjang.html" class="btn position-relative d-flex align-items-center px-3 py-2 rounded-pill shadow-sm" style="background:#fff3f8; border:1.5px solid #ff69b4;">
+              <i class="bi bi-cart-fill fs-5" style="color:#ff69b4;"></i>
+              <span class="ms-2 fw-semibold" style="color:#3a3a5a;">Keranjang</span>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" id="cart-badge-desktop" style="background:#ff69b4; color:#fff; font-size:0.85em; border:2px solid #fff;">0</span>
+            </a>
+            <!-- Dropdown keranjang preview -->
+            <div class="dropdown-menu dropdown-menu-end p-3 shadow" style="min-width:300px; max-width:350px;">
+              <div class="text-center text-muted small">Keranjang masih kosong</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+    <div class="bg-white rounded shadow-sm p-4 text-center" style="background: #fff; border-radius: 14px;">
+      <h2 class="fw-bold mb-2" style="color: #3a3a5a; font-family: 'Poppins', sans-serif; letter-spacing: 1px;">
+        <i class="fa-solid me-2" style="color: #ff69b4;"></i>Semua Produk
+      </h2>
+      <p class="mb-0" style="color: #666; font-size: 1.08rem;">
+        Temukan berbagai pilihan kue dan roti terbaik dari <span style="color:#ff69b4; font-weight:600;">Damen Bakery's</span>!
+      </p>
+    </div>
+  </div>
+
+  <div class="container mb-5 mt-3">
+    <div class="row g-3 justify-content-start" id="produk-row" style="padding-left: 12px;">
+      <!-- Produk akan digenerate otomatis oleh script.js -->
+    </div>
+  </div>
+
+  <footer class="text-center py-2 bg-blue text-black">
+    <p>&copy; 2025 Damen Bakery's. All rights reserved.</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  // Data produk
+  const produkList = [
+    {
+      id: "produk1",
+      nama: "Nastar Keju Premium",
+      harga: 10857,
+      gambar: "https://i.pinimg.com/736x/12/30/90/123090f46906e40ca08f47516c148e98.jpg",
+      deskripsi: "Kue ini terbuat dari 100% alami tanpa bahan pengawet, sangat lezat dan cocok untuk segala usia.",
+      diskon: "-10%"
+    },
+    {
+      id: "produk2",
+      nama: "Choco Lava Cake",
+      harga: 10520,
+      gambar: "https://images.unsplash.com/photo-1606788075762-8e3728bd50bd",
+      deskripsi: "Kue coklat lumer di dalam, favorit anak-anak.",
+      diskon: "-10%"
+    },
+    {
+      id: "produk3",
+      nama: "Brownies Coklat",
+      harga: 35000,
+      gambar: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=450&q=80",
+      deskripsi: "Brownies coklat premium, tekstur fudgy dan rasa coklat pekat.",
+      diskon: "-20%"
+    },
+    {
+      id: "produk4",
+      nama: "Brownies Coklat",
+      harga: 35000,
+      gambar: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=450&q=80",
+      deskripsi: "Brownies coklat premium, tekstur fudgy dan rasa coklat pekat.",
+      diskon: "-20%"
+    },
+    // Tambahkan produk lain di sini...
+  ];
+
+  // Generate produk ke HTML
+  function tampilkanProduk() {
+    const row = document.getElementById('produk-row');
+    row.innerHTML = '';
+    produkList.forEach(p => {
+      row.innerHTML += `
+        <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+          <div class="card product-card h-100 border-0 shadow-sm"
+            style="border-radius: 12px;"
+            data-id="${p.id}"
+            data-nama="${p.nama}"
+            data-harga="${p.harga}"
+            data-gambar="${p.gambar}"
+            data-deskripsi="${p.deskripsi}">
+            <div class="position-relative">
+              <img src="${p.gambar}" class="card-img-top" alt="Produk" style="height: 180px; object-fit: cover; width: 100%; border-radius: 12px 12px 0 0;" />
+              <span class="badge bg-danger position-absolute top-0 end-0 m-2" style="font-size: 0.8rem;">${p.diskon || ''}</span>
+            </div>
+            <div class="card-body p-2">
+              <span class="badge bg-warning text-dark mb-1" style="font-size: 0.75rem;">Star</span>
+              <h6 class="card-title mb-1" style="font-weight: 500; font-size: 0.95rem; min-height: 2.2em;">${p.nama}</h6>
+              <div class="mb-1">
+                <span class="badge bg-light text-dark border" style="font-size: 0.7rem;">Garansi</span>
+                <span class="badge bg-danger" style="font-size: 0.7rem;">COD</span>
+              </div>
+              <p class="text-danger fw-bold mb-2" style="font-size: 1.1rem;">Rp${Number(p.harga).toLocaleString()}</p>
+              <div class="d-flex justify-content-between gap-1 mt-2">
+                <a href="pembelian.html" class="btn btn-outline-success btn-sm flex-fill py-1 px-2 btn-beli">Beli</a>
+                <button class="btn btn-outline-success btn-sm flex-fill py-1 px-2 btn-keranjang"
+                  data-nama="${p.nama}" data-harga="${p.harga}" data-gambar="${p.gambar}" data-deskripsi="${p.deskripsi}" data-id="${p.id}">+ Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  // Fungsi update badge keranjang di navbar
+  function updateCartBadge() {
+    const keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+    let total = 0;
+    keranjang.forEach(item => total += item.qty);
+    // Update semua badge di navbar (mobile & desktop)
+    document.querySelectorAll('.bi-cart-fill').forEach(icon => {
+      const badge = icon.parentElement.querySelector('.badge');
+      if (badge) badge.textContent = total;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    tampilkanProduk();
+    updateCartBadge();
+
+    // Event delegation untuk tombol Beli dan + Keranjang
+    document.getElementById('produk-row').addEventListener('click', function(e) {
+      // Tombol Beli
+      if (e.target.classList.contains('btn-beli')) {
+        const card = e.target.closest('.product-card');
+        const produk = {
+          id: card.dataset.id,
+          nama: card.dataset.nama,
+          harga: card.dataset.harga,
+          gambar: card.dataset.gambar,
+          deskripsi: card.dataset.deskripsi
+        };
+        sessionStorage.setItem('produk_dipilih', JSON.stringify(produk));
+        window.location.href = 'pembelian.html';
+      }
+
+      // Tombol + Keranjang
+      if (e.target.classList.contains('btn-keranjang')) {
+        const card = e.target.closest('.product-card');
+        const produk = {
+          id: card.dataset.id,
+          nama: card.dataset.nama,
+          harga: Number(card.dataset.harga),
+          gambar: card.dataset.gambar,
+          deskripsi: card.dataset.deskripsi,
+          qty: 1
+        };
+        let keranjang = JSON.parse(localStorage.getItem('keranjang')) || [];
+        const idx = keranjang.findIndex(item => item.id === produk.id);
+        if (idx > -1) {
+          keranjang[idx].qty += 1;
+        } else {
+          keranjang.push(produk);
+        }
+        localStorage.setItem('keranjang', JSON.stringify(keranjang));
+        updateCartBadge();
+        alert('Produk ditambahkan ke keranjang!');
+      }
+    });
+  });
+</script>
+</body>
+</html>
